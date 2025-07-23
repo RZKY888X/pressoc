@@ -48,15 +48,6 @@ const COLORS = ['#34d399', '#1e293b'];
 export default function SLAAndTicketPage() {
   return (
     <div className="min-h-screen bg-[#0f172a] text-white font-sans">
-      <header className="bg-[#1e293b] p-4 flex justify-between items-center">
-        <h1 className="text-2xl font-bold">PRESSOC</h1>
-        <div className="space-y-1 cursor-pointer">
-          <div className="w-8 h-1 bg-white rounded"></div>
-          <div className="w-8 h-1 bg-white rounded"></div>
-          <div className="w-8 h-1 bg-white rounded"></div>
-        </div>
-      </header>
-
       <main className="p-6 space-y-6">
 
         {/* SLA Card */}

@@ -1,5 +1,4 @@
-
-rename env_example => .env
-npm install
-npx prisma generate
-npm run dev
+1.  rename env_example => .env
+2.  npm install
+3.  npx prisma generate
+4.  npm run dev

@@ -1,23 +1,33 @@
 "use client";
 import { useState } from "react";
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 
 export default function HamburgerMenu() {
   const [isOpen, setIsOpen] = useState(false);
+  const pathname = usePathname();
+
+  const menuItems = [
+    { href: "/dashboard", label: "Dashboard" },
+    { href: "/device", label: "Devices" },
+    { href: "/sensor", label: "Sensors" },
+    { href: "/alert", label: "Alerts" },
+    { href: "/ticket", label: "Ticket" },
+    { href: "/account", label: "Account" },
+  ];
 
   return (
     <>
-      {/* Hamburger Button */}
       <button
         onClick={() => setIsOpen(true)}
         className="z-50 relative space-y-1 text-white text-3xl p-2"
+        aria-label="Open menu"
       >
         <span className="block h-1 w-6 bg-amber-50" />
         <span className="block h-1 w-6 bg-amber-50" />
         <span className="block h-1 w-6 bg-amber-50" />
       </button>
 
-      {/* Overlay (klik luar untuk nutup) */}
       <div
         className={`fixed inset-0 z-40 transition-opacity duration-300 ${
           isOpen ? "opacity-100 pointer-events-auto" : "opacity-0 pointer-events-none"
@@ -25,13 +35,11 @@ export default function HamburgerMenu() {
         onClick={() => setIsOpen(false)}
       />
 
-      {/* Side Menu */}
       <div
-        className={`fixed top-0 right-0 h-screen w-64 bg-[#1B263B] shadow-lg z-50 transform transition-transform duration-300 ${
+        className={`fixed top-0 right-0 h-screen w-64 bg-[#030E1C] shadow-lg z-50 transform transition-transform duration-300 ${
           isOpen ? "translate-x-0" : "translate-x-full"
         }`}
       >
-        {/* Close Button */}
         <div className="flex justify-end p-4">
           <button
             onClick={() => setIsOpen(false)}
@@ -42,14 +50,25 @@ export default function HamburgerMenu() {
           </button>
         </div>
 
-        {/* Menu Items */}
-        <ul className="flex-grow flex flex-col items-center justify-center space-y-4 text-white text-base">
-          <li><Link href="/dashboard" className="block hover:text-blue-400 text-2xl font-medium">Dashboard</Link></li>
-          <li><Link href="/device" className="block hover:text-blue-400 text-2xl font-medium">Devices</Link></li>
-          <li><Link href="/sensor" className="block hover:text-blue-400 text-2xl font-medium">Sensors</Link></li>
-          <li><Link href="/alert" className="block hover:text-blue-400 text-2xl font-medium">Alerts</Link></li>
-          <li><Link href="/ticket" className="block hover:text-blue-400 text-2xl font-medium">Ticket</Link></li>
-          <li><Link href="/account" className="block hover:text-blue-400 text-2xl font-medium">Account</Link></li>
+        <ul className="flex-grow flex flex-col items-center justify-center text-white text-base w-full space-y-2">
+          {menuItems.map((item) => {
+            const isActive = pathname === item.href;
+
+            return (
+              <li key={item.href} className="text-center">
+                <Link
+                  href={item.href}
+                  className={`block text-2xl font-medium py-2 transition-all ${
+                    isActive
+                      ? "text-[#5d7bb6] border-b-2 border-[#5d7bb6]"
+                      : "hover:text-[#5d7bb6]"
+                  }`}
+                >
+                  {item.label}
+                </Link>
+              </li>
+            );
+          })}
         </ul>
       </div>
     </>

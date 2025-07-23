@@ -48,7 +48,7 @@ const SensorSunburst: React.FC<SensorSunburstProps> = ({ data }) => {
       <ResponsiveSunburst
         data={structuredData}
         margin={{ top: 10, right: 10, bottom: 10, left: 10 }}
-        identity="name"
+        id="name"
         value="value"
         cornerRadius={2}
         borderWidth={1}

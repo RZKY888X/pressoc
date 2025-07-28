@@ -3,6 +3,7 @@
 import { useState } from 'react';
 
 type Ticket = {
+  id: number;
   title: string;
   status: string;
   priority: string;
@@ -14,9 +15,11 @@ type Ticket = {
 export default function TicketDetail({
   ticket,
   onBack,
+  onSave,
 }: {
   ticket: Ticket;
   onBack: () => void;
+  onSave: (updated: Ticket) => void;
 }) {
   const [form, setForm] = useState(ticket);
 
@@ -89,7 +92,7 @@ export default function TicketDetail({
       <div className="mb-6">
         <label className="text-sm">Recent Activity</label>
         <p className="text-xs text-slate-300">
-          2025-07-18 10:00 — <i>System: Ticket Created</i>
+          {form.updatedAt} — <i>System: Ticket Created</i>
         </p>
       </div>
 
@@ -103,11 +106,7 @@ export default function TicketDetail({
 
       <div className="flex gap-2">
         <button
-          onClick={() => {
-            // Simpan ke backend (kalau ada)
-            console.log('Saved:', form);
-            onBack();
-          }}
+          onClick={() => onSave(form)}
           className="flex-1 bg-blue-600 hover:bg-blue-700 text-white py-2 rounded"
         >
           Save
